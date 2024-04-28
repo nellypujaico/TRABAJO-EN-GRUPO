@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnIngresar;
     EditText txtUsuario, txtContrasena;
 
+    Button btn_registrar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnIngresar.setOnClickListener(this);
         listaIngreso = cargar();
         listaIdentidad = new ArrayList<Usuario>();
+        btn_registrar=(Button) findViewById(R.id.btn_registrar);
+        btn_registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentReg = new Intent(MainActivity.this,RegistroUsuario.class);
+                MainActivity.this.startActivity(intentReg);
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
