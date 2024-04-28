@@ -8,84 +8,99 @@
     android:orientation="vertical"
     tools:context=".RegistroUsuario">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="60dp"
         android:text="REGISTRO DE USUARIO"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
-        android:id="@+id/textView2"
-        android:layout_width="280dp"
-        android:layout_height="39dp"
-
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="216dp"
-        android:inputType="text"
-        android:text="Nombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/textView5"
+        android:id="@+id/txtusuarioR"
         android:layout_width="280dp"
         android:layout_height="42dp"
 
         android:layout_marginStart="64dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="208dp"
         android:inputType="text"
-        android:text="Usuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/textView3"
-        android:layout_width="280dp"
-        android:layout_height="43dp"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="344dp"
-        android:inputType="text"
-        android:text="Contraseña"
+        android:layout_marginTop="180dp"
+        android:text="Ingrese su nombre de usuario:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/textView4"
-        android:layout_width="280dp"
-        android:layout_height="43dp"
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="412dp"
-        android:inputType="text"
-        android:text="Confirme Contraseña"
+        android:layout_marginTop="284dp"
+        android:text="Ingrese su contraseña:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="392dp"
+        android:text="Confirme su contraseña:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="504dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="520dp"
         android:text="REGISTRAR"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnregresar"
+        android:id="@+id/btnRegresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="572dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="520dp"
         android:text="REGRESAR"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtcontrasenaR"
+        android:layout_width="280dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="308dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtcontrasenaRC"
+        android:layout_width="280dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="420dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

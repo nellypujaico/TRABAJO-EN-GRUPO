@@ -3,7 +3,6 @@ package com.example.proyecto;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,13 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
-    Usuario objUsuario = null;
-    ArrayList<String> listaIngreso;
-    ArrayList<Usuario> listaIdentidad;
+    public static ArrayList<String> listaIngreso = new ArrayList<>();
+    ArrayList<String> listaIdentidad;
     Button btnIngresar;
     EditText txtUsuario, txtContrasena;
-
     Button btn_registrar;
 
 
@@ -37,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtContrasena = (EditText)findViewById(R.id.txtContrasena);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
         btnIngresar.setOnClickListener(this);
-        listaIngreso = cargar();
-        listaIdentidad = new ArrayList<Usuario>();
         btn_registrar=(Button) findViewById(R.id.btn_registrar);
         btn_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,19 +48,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public ArrayList<String> cargar(){
+    public void cargar(){
+        String texUsuario = txtUsuario.getText().toString();
+        String texContrasena = txtContrasena.getText().toString();
         listaIngreso = new ArrayList<String>();
-        String obj1 = new String("INGRESAR");
-        listaIngreso.add(obj1);
-
-        return listaIngreso;
+        listaIngreso.add(texUsuario);
+        listaIngreso.add(texContrasena);
     }
 
     @Override
     public void onClick(View v) {
-        String texUsuario = txtUsuario.getText().toString();
-        String usuario = "diego";
-        if(texUsuario.equals(usuario)){
+        boolean sonIguales = comparar();
+        if(sonIguales){
             if(v == btnIngresar){
                 registrar();
                 Intent objintent = new Intent(MainActivity.this, Menu.class);
@@ -81,10 +74,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public static boolean comparar(){
+        for (int i = 0; i < listaIngreso.size(); i++){
+            if(!listaIngreso.get(i).equals(RegistroUsuario.listaRegistro.get(i))) return false;
+        }
+        return true;
+    }
+
     public void registrar(){
         String texUsuario = txtUsuario.getText().toString();
-        objUsuario = new Usuario();
-        objUsuario.setUsuario(texUsuario);
-        listaIdentidad.add(objUsuario);
+        listaIdentidad.add(texUsuario);
     }
 }
