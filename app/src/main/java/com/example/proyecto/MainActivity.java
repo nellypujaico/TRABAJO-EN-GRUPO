@@ -26,12 +26,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btn_registrar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
         txtUsuario = (EditText)findViewById(R.id.txtUsuario);
         txtContrasena = (EditText)findViewById(R.id.txtContrasena);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.this.startActivity(intentReg);
             }
         });
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
