@@ -13,8 +13,23 @@
         android:theme="@style/Theme.Proyecto"
         tools:targetApi="31">
         <activity
+            android:name=".AlertasRecordatorios"
+            android:exported="false" />
+        <activity
+            android:name=".InformesGastos"
+            android:exported="false" />
+        <activity
+            android:name=".CategorizacionGastos"
+            android:exported="false" />
+        <activity
+            android:name=".GestionIngresos"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroGasto"
+            android:exported="false" />
+        <activity
             android:name=".RegistroUsuario"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

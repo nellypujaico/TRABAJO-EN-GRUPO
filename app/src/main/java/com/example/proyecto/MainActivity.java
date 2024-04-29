@@ -19,7 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity{
     ArrayList<String> listaIngreso = new ArrayList<>();
     ArrayList<Usuario> listaRegistrada = null;
-    Button btnIngresar, btn_registrar;
+    Button btnIngresar, btn_registrar ;
     EditText txtUsuario, txtContrasena;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity{
                 MainActivity.this.startActivity(intentReg);
             }
         });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
