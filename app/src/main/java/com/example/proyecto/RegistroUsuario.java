@@ -13,74 +13,73 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.proyecto.auth_user.DBHelper_auth;
+
 import java.util.ArrayList;
 
-public class RegistroUsuario extends AppCompatActivity implements View.OnClickListener{
+public class RegistroUsuario extends AppCompatActivity{
 
-    ArrayList<Usuario> listaRegistro;
-    Usuario objusuario = null;
     EditText txtusuarioR, txtcontrasenaR, txtcontrasenaRC;
     Button btnRegistrar, btnRegresar;
+    DBHelper_auth dbHelperAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registro_usuario);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-        txtusuarioR = (EditText)findViewById(R.id.txtusuarioR);
-        txtcontrasenaR = (EditText)findViewById(R.id.txtcontrasenaR);
-        txtcontrasenaRC = (EditText)findViewById(R.id.txtcontrasenaRC);
-        btnRegistrar = (Button)findViewById(R.id.btnRegistrar);
-        btnRegistrar.setOnClickListener(this);
-        btnRegresar = (Button)findViewById(R.id.btnRegresar);
-        listaRegistro = new ArrayList<Usuario>();
 
+        txtusuarioR = (EditText) findViewById(R.id.txtusuarioR);
+        txtcontrasenaR = (EditText) findViewById(R.id.txtcontrasenaR);
+        txtcontrasenaRC = (EditText) findViewById(R.id.txtcontrasenaRC);
+        btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
+        btnRegresar = (Button) findViewById(R.id.btnRegresar);
+        dbHelperAuth = new DBHelper_auth(this);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 regresar();
             }
         });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user, pwd, copwd;
+                user = txtusuarioR.getText().toString();
+                pwd = txtcontrasenaR.getText().toString();
+                copwd = txtcontrasenaRC.getText().toString();
+                if(user.equals("") || pwd.equals("") || copwd.equals("")){
+                    Toast.makeText(RegistroUsuario.this,"Ingresar datos", Toast.LENGTH_LONG).show();
+                }else{
+                    if(pwd.equals(copwd)) {
+                        if(dbHelperAuth.verificaremail(user)){
+                            Toast.makeText(RegistroUsuario.this, "Usuario ya existe", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        //Proceso de registro
+                        boolean registroexitoso = dbHelperAuth.inserData(user,pwd);
+                        if(registroexitoso)
+                            Toast.makeText(RegistroUsuario.this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(RegistroUsuario.this,"Fallo al registrar al usuario", Toast.LENGTH_LONG).show();
+                    } else{
+                        Toast.makeText(RegistroUsuario.this,"Password no coincide", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
         });
-    }
 
-    public void registro(){
-        String texUsuario = txtusuarioR.getText().toString();
-        String textcontrasena = txtcontrasenaR.getText().toString();
-
-        objusuario= new Usuario();
-        objusuario.setUsuario(texUsuario);
-        objusuario.setContrasena(textcontrasena);
-        listaRegistro.add(objusuario);
-
-        txtusuarioR.setText("");
-        txtcontrasenaR.setText("");
-        txtcontrasenaRC.setText("");
     }
     public void regresar(){
         Intent objIntent = new Intent(RegistroUsuario.this,MainActivity.class);
-        Bundle objbundle = new Bundle();
-        objbundle.putSerializable("datos", listaRegistro);
-        objIntent.putExtras(objbundle);
-        startActivity(objIntent);
-        finish();
+        RegistroUsuario.this.startActivity(objIntent);
     }
 
-    @Override
-    public void onClick(View v) {
-        String texcontrasenaC = txtcontrasenaRC.getText().toString();
-        String texcontrasena = txtcontrasenaR.getText().toString();
-        if(texcontrasena.equals(texcontrasenaC)){
-            if(v == btnRegistrar){
-                registro();
-            }
-        }else{
-            Toast.makeText(getApplicationContext(),"La contraseña ingresa no coincide", Toast.LENGTH_LONG).show();
-        }
-    }
 }
