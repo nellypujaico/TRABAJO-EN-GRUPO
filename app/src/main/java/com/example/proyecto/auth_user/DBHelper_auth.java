@@ -17,8 +17,18 @@ public class DBHelper_auth extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users(userid INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT UNIQUE NOT NULL, password TEXT NOT NULL)");
-
+        db.execSQL("CREATE TABLE users(userid INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT UNIQUE NOT NULL, " +
+                "password TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE categoria(id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL," +
+                "tipo TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE ingresos(id_ingresos INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER,fecha DATE, " +
+                "cantidad_ingresos DECIMAL, id_categoria INTEGER, " +
+                "descripcion TEXT NOT NULL,FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria) ," +
+                "FOREIGN KEY(userid) REFERENCES users(userid))");
+        db.execSQL("CREATE TABLE gastos(id_gastos INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER,fecha DATE, " +
+                "cantidad_gasto DECIMAL,id_categoria INTEGER, descripcion TEXT NOT NULL," +
+                "FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria)," +
+                "FOREIGN KEY(userid) REFERENCES users(userid))");
     }
 
     @Override
