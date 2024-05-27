@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper_auth extends SQLiteOpenHelper {
-    public static final String DBName = "register_users.db";
+    public static final String DBName = "contafacil.db";
 
     public DBHelper_auth(@Nullable Context context) {
         super(context, DBName, null, 1);
@@ -17,7 +17,8 @@ public class DBHelper_auth extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users(email TEXT PRIMARY KEY, password TEXT)");
+        db.execSQL("CREATE TABLE users(userid INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT UNIQUE NOT NULL, password TEXT NOT NULL)");
+
     }
 
     @Override
