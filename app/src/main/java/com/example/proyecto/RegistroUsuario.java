@@ -18,35 +18,30 @@ import com.example.proyecto.auth_user.DBHelper_auth;
 import java.util.ArrayList;
 
 public class RegistroUsuario extends AppCompatActivity{
-
     EditText txtusuarioR, txtcontrasenaR, txtcontrasenaRC;
     Button btnRegistrar, btnRegresar;
     DBHelper_auth dbHelperAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registro_usuario);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-
-        txtusuarioR = (EditText) findViewById(R.id.txtusuarioR);
-        txtcontrasenaR = (EditText) findViewById(R.id.txtcontrasenaR);
-        txtcontrasenaRC = (EditText) findViewById(R.id.txtcontrasenaRC);
+        txtusuarioR = (EditText)findViewById(R.id.txtusuarioR);
+        txtcontrasenaR = (EditText)findViewById(R.id.txtcontrasenaR);
+        txtcontrasenaRC = (EditText)findViewById(R.id.txtcontrasenaRC);
+        btnRegistrar = (Button)findViewById(R.id.btnRegistrar);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
-        btnRegresar = (Button) findViewById(R.id.btnRegresar);
+        btnRegresar = (Button)findViewById(R.id.btnRegresar);
         dbHelperAuth = new DBHelper_auth(this);
+
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 regresar();
             }
         });
+
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,9 +59,12 @@ public class RegistroUsuario extends AppCompatActivity{
                         }
                         //Proceso de registro
                         boolean registroexitoso = dbHelperAuth.inserData(user,pwd);
-                        if(registroexitoso)
+                        if(registroexitoso) {
                             Toast.makeText(RegistroUsuario.this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show();
-                        else
+                            txtusuarioR.setText("");
+                            txtcontrasenaR.setText("");
+                            txtcontrasenaRC.setText("");
+                        }else
                             Toast.makeText(RegistroUsuario.this,"Fallo al registrar al usuario", Toast.LENGTH_LONG).show();
                     } else{
                         Toast.makeText(RegistroUsuario.this,"Password no coincide", Toast.LENGTH_LONG).show();
@@ -75,7 +73,6 @@ public class RegistroUsuario extends AppCompatActivity{
                 }
             }
         });
-
     }
     public void regresar(){
         Intent objIntent = new Intent(RegistroUsuario.this,MainActivity.class);

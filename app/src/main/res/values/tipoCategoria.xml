@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tipoCategoria">
+        <item>Comestibles</item>
+        <item>Restaurantes y comida rapida</item>
+        <item>Bebidas</item>
+        <item>Matricula</item>
+        <item>Materiales escolares</item>
+        <item>Cursos y talleres</item>
+        <item>Cine</item>
+        <item>Conciertos</item>
+        <item>Recreativos</item>
+        <item>Consultas médicas</item>
+        <item>Medicamentos y farmacia</item>
+        <item>Seguros médicos</item>
+        <item>Transporte público</item>
+        <item>Gasolina y mantenimiento del vehículo</item>
+        <item>Viajes en avión/tren/bus</item>
+        <item>Alquiler o hipoteca</item>
+        <item>Servicios públicos</item>
+        <item>Mantenimiento y reparaciones</item>
+        <item>Ropa</item>
+        <item>Calzado</item>
+        <item>Accesorios de moda</item>
+        <item>Alojamiento</item>
+        <item>Transporte (vuelos, trenes, alquiler de coches)</item>
+        <item>Actividades turísticas y excursiones</item>
+        <item>Otros</item>
+    </string-array>
+</resources>

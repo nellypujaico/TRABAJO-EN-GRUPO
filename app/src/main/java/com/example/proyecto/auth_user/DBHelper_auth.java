@@ -60,4 +60,31 @@ public class DBHelper_auth extends SQLiteOpenHelper {
             return true;
         else return false;
     }
+    public boolean insertarGasto(int id, String fecha, double costo, int id_categoria, String descripcion){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("userid", id);
+        values.put("fecha", fecha);
+        values.put("cantidad_gasto", costo);
+        values.put("id_categoria", id_categoria);
+        values.put("descripcion", descripcion);
+        long result = db.insert("gastos", null, values);
+        if (result == -1) return false;
+        return true;
+    }
+    public int obtenerIdCategoria(String nombreCategoria, String tipoCategoria) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int idCategoria = -1;
+
+        String query = "SELECT id_categoria FROM categoria WHERE nombre = ? AND tipo = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{nombreCategoria, tipoCategoria});
+
+        if (cursor.moveToFirst()) {
+            idCategoria = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return idCategoria;
+    }
 }
