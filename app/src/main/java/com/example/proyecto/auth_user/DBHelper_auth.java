@@ -5,8 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.example.proyecto.Metodos.Gasto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper_auth extends SQLiteOpenHelper {
     public static final String DBName = "contafacil.db";
@@ -34,6 +40,7 @@ public class DBHelper_auth extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS users");
+        onCreate(db);
     }
 
     public boolean inserData(String email, String password){
@@ -42,26 +49,29 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         contentValues.put("email", email);
         contentValues.put("password",password);
         long result = db.insert("users", null,contentValues);
-        if (result == -1) return false;
-        else return true;
+        return result != -1; // Simplified return statement
     }
 
     public boolean verificaremail(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ?", new String[]{email});
-        if(cursor.getCount() > 0)
-            return true;
-        else return false;
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
-    public boolean verificarUsuario(String email,String pwd){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ? and password = ?", new String[]{email,pwd});
-        if(cursor.getCount() > 0)
-            return true;
-        else return false;
-    }
-    public boolean insertarGasto(int id, String fecha, double costo, int id_categoria, String descripcion){
 
+    public Integer verificarUsuario(String email, String pwd){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT userid FROM users WHERE email = ? AND password = ?", new String[]{email, pwd});
+        Integer userId = null;
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(0);
+        }
+        cursor.close();
+        return userId;
+    }
+
+    public boolean insertarGasto(int id, String fecha, double costo, int id_categoria, String descripcion){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("userid", id);
@@ -70,9 +80,9 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         values.put("id_categoria", id_categoria);
         values.put("descripcion", descripcion);
         long result = db.insert("gastos", null, values);
-        if (result == -1) return false;
-        return true;
+        return result != -1; // Simplified return statement
     }
+
     public int obtenerIdCategoria(String nombreCategoria, String tipoCategoria) {
         SQLiteDatabase db = this.getReadableDatabase();
         int idCategoria = -1;
@@ -87,4 +97,67 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         cursor.close();
         return idCategoria;
     }
+
+    public List<Gasto> obtenerGastos(int userId) {
+        List<Gasto> listaGastos = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM gastos WHERE userid = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("id_gastos"));
+                String fecha = cursor.getString(cursor.getColumnIndex("fecha"));
+                double cantidadGasto = cursor.getDouble(cursor.getColumnIndex("cantidad_gasto"));
+                int idCategoria = cursor.getInt(cursor.getColumnIndex("id_categoria"));
+                String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+
+                Gasto gasto = new Gasto(id, userId, fecha, cantidadGasto, idCategoria, descripcion);
+                listaGastos.add(gasto);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return listaGastos;
+    }
+    public Gasto obtenerGastoPorId(int gastoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Gasto gasto = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM gastos WHERE id_gastos = ?", new String[]{String.valueOf(gastoId)});
+
+        if (cursor.moveToFirst()) {
+            int userId = cursor.getInt(cursor.getColumnIndex("userid"));
+            String fecha = cursor.getString(cursor.getColumnIndex("fecha"));
+            double cantidadGasto = cursor.getDouble(cursor.getColumnIndex("cantidad_gasto"));
+            int idCategoria = cursor.getInt(cursor.getColumnIndex("id_categoria"));
+            String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+
+            gasto = new Gasto(gastoId, userId, fecha, cantidadGasto, idCategoria, descripcion);
+        }
+
+        cursor.close();
+        return gasto;
+    }
+
+    public boolean eliminarGasto(int gastoId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete("gastos", "id_gastos = ?", new String[]{String.valueOf(gastoId)});
+        return result > 0; // Devuelve true si se eliminó al menos una fila
+    }
+
+    public boolean actualizarGasto(int id, String nuevaFecha, String nuevaDescripcion, double nuevaCantidad) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("fecha", nuevaFecha);
+        values.put("descripcion", nuevaDescripcion);
+        values.put("cantidad_gasto", nuevaCantidad);
+
+        int filasAfectadas = db.update("gastos", values, "id_gastos = ?", new String[]{String.valueOf(id)});
+
+        return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
+    }
+
+
 }
+

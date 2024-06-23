@@ -3,27 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- AnyChartView for displaying the chart -->
-    <com.anychart.AnyChartView
-        android:id="@+id/any_chart_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_gastos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnRegresar"
-        android:layout_marginBottom="16dp" />
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:background="@android:color/white"
+        android:scrollbars="vertical" />
 
-    <!-- Button to go back -->
+    <!-- Botón para regresar a RegistroGasto -->
     <Button
         android:id="@+id/btnRegresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Regresar"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp" />
 
 </RelativeLayout>
-
-
-
 
 

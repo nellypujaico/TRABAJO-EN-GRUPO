@@ -1,6 +1,7 @@
 package com.example.proyecto;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,17 +42,26 @@ public class MainActivity extends AppCompatActivity{
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isLoggedId = dbHelperAuth.verificarUsuario(txtUsuario.getText().toString(), txtContrasena.getText().toString());
-                if (isLoggedId){
-                        Intent objintent = new Intent(MainActivity.this,Menu.class);
-                        MainActivity.this.startActivity(objintent);
-                }else{
+                Integer userId = dbHelperAuth.verificarUsuario(txtUsuario.getText().toString(), txtContrasena.getText().toString());
+                if (userId != null){
+                    // Guardar estado de inicio de sesión e ID del usuario en SharedPreferences
+                    SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putInt("userId", userId);
+                    editor.apply();
+
+                    // Redirigir al menú principal
+                    Intent objintent = new Intent(MainActivity.this, Menu.class);
+                    MainActivity.this.startActivity(objintent);
+                    finish(); // Finaliza MainActivity para evitar que el usuario regrese a ella con el botón de retroceso
+                } else {
                     Toast.makeText(MainActivity.this, "Usuario incorrecto o contraseña incorrecta", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
+
+
 
         btn_registrar.setOnClickListener(new View.OnClickListener() {
             @Override
