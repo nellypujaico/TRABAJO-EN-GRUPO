@@ -68,7 +68,7 @@ public class InformesGastos extends AppCompatActivity {
 
         List<DataEntry> dataEntries = new ArrayList<>();
         for (Gasto gasto : listaGastos) {
-            dataEntries.add(new ValueDataEntry(gasto.getDescripcion(), gasto.getCantidadGasto()));
+            dataEntries.add(new ValueDataEntry(gasto.getIdCategoria(), gasto.getCantidadGasto()));
         }
 
         // Configure the chart
