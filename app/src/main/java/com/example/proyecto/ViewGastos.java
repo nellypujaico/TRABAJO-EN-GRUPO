@@ -1,7 +1,10 @@
 package com.example.proyecto;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +25,7 @@ public class ViewGastos extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GastoAdapter gastoAdapter;
     private DBHelper_auth dbHelper;
+    private int userId; // Variable para almacenar userId
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class ViewGastos extends AppCompatActivity {
         dbHelper = new DBHelper_auth(this);
 
         // Obtener userId del Intent
-        int userId = getIntent().getIntExtra("userId", -1);
+        userId = getIntent().getIntExtra("userId", -1);
 
         if (userId == -1) {
             // Manejar el caso donde no se recibe userId correctamente
@@ -48,5 +52,18 @@ public class ViewGastos extends AppCompatActivity {
         // Obtener y mostrar gastos del usuario
         List<Gasto> listaGastos = dbHelper.obtenerGastos(userId);
         gastoAdapter.setGastos(listaGastos);
+
+        // Configurar el botón de regresar
+        Button btnRegresar = findViewById(R.id.btnRegresar);
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Al hacer clic en Regresar, iniciar la actividad RegistroGastos
+                Intent intent = new Intent(ViewGastos.this, RegistroGasto.class);
+                startActivity(intent);
+            }
+        });
     }
 }
+
+

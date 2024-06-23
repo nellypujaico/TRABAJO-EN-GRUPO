@@ -66,8 +66,11 @@ public class DetalleGastoActivity extends AppCompatActivity {
         BtnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(DetalleGastoActivity.this, RegistroGasto.class);
-                DetalleGastoActivity.this.startActivity(intentReg);
+                // Redirigir a ViewGastos con el userId adecuado
+                Intent intent = new Intent(DetalleGastoActivity.this, ViewGastos.class);
+                intent.putExtra("userId", gasto.getUserId());
+                startActivity(intent);
+                finish(); // Finalizar esta actividad para no volver atrás con el botón de retroceso
             }
         });
 
@@ -79,28 +82,29 @@ public class DetalleGastoActivity extends AppCompatActivity {
 
                 if (eliminado) {
                     Toast.makeText(DetalleGastoActivity.this, "Gasto eliminado correctamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DetalleGastoActivity.this, RegistroGasto.class);
+                    // Redirigir a ViewGastos con el userId adecuado
+                    Intent intent = new Intent(DetalleGastoActivity.this, ViewGastos.class);
+                    intent.putExtra("userId", gasto.getUserId());
                     startActivity(intent);
+                    finish(); // Finalizar esta actividad para no volver atrás con el botón de retroceso
                 } else {
                     Toast.makeText(DetalleGastoActivity.this, "Error al eliminar el gasto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        // Funcionalidad del botón Modificar (implementación pendiente)
-        /*BtnModificar.setOnClickListener(new View.OnClickListener() {
+        // Funcionalidad del botón Modificar
+        BtnModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Implementa aquí la lógica para abrir la actividad de modificación de gasto
-                // Por ejemplo, puedes abrir una nueva actividad usando un Intent y pasar el ID del gasto
                 Intent intent = new Intent(DetalleGastoActivity.this, ModificarGastoActivity.class);
                 intent.putExtra("gastoId", gastoId);
                 startActivity(intent);
             }
         });
 
-         */
     }
 }
+
 
 

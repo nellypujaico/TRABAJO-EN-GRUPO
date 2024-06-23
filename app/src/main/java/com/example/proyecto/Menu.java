@@ -43,52 +43,58 @@ public class Menu extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
 
-        btnRegistrarGasto = (Button)findViewById(R.id.btnRegistrarGasto);
+        btnRegistrarGasto = findViewById(R.id.btnRegistrarGasto);
         btnRegistrarGasto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(Menu.this, RegistroGasto.class);
-                Menu.this.startActivity(intentReg);
+                Intent intent = new Intent(Menu.this, RegistroGasto.class);
+                startActivity(intent);
             }
         });
 
-        btnGestionIngresos = (Button)findViewById(R.id.btnGestionIngresos);
+        btnGestionIngresos = findViewById(R.id.btnGestionIngresos);
         btnGestionIngresos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(Menu.this, GestionIngresos.class);
-                Menu.this.startActivity(intentReg);
+                Intent intent = new Intent(Menu.this, GestionIngresos.class);
+                startActivity(intent);
             }
         });
 
-        btnCategorizacion = (Button)findViewById(R.id.btnCategorizacion);
+        btnCategorizacion = findViewById(R.id.btnCategorizacion);
         btnCategorizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(Menu.this, CategorizacionGastos.class);
-                Menu.this.startActivity(intentReg);
+                Intent intent = new Intent(Menu.this, CategorizacionGastos.class);
+                startActivity(intent);
             }
         });
 
-        btnInformes = (Button)findViewById(R.id.btnInformes);
+        btnInformes = findViewById(R.id.btnInformes);
         btnInformes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(Menu.this, InformesGastos.class);
-                Menu.this.startActivity(intentReg);
+                // Obtener el ID del usuario desde SharedPreferences
+                SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                int userId = preferences.getInt("userId", -1);
+
+                // Iniciar InformesGastos con el ID del usuario
+                Intent intent = new Intent(Menu.this, InformesGastos.class);
+                intent.putExtra("userId", userId); // Pasar el userId como extra
+                startActivity(intent);
             }
         });
 
-        btnAlertas = (Button)findViewById(R.id.btnAlertas);
+        btnAlertas = findViewById(R.id.btnAlertas);
         btnAlertas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(Menu.this, AlertasRecordatorios.class);
-                Menu.this.startActivity(intentReg);
+                Intent intent = new Intent(Menu.this, AlertasRecordatorios.class);
+                startActivity(intent);
             }
         });
 
-        btnSalir = (Button)findViewById(R.id.Exit);
+        btnSalir = findViewById(R.id.Exit);
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,9 +105,9 @@ public class Menu extends AppCompatActivity {
                 editor.apply();
 
                 // Redirigir a la pantalla de inicio de sesión
-                Intent intentReg = new Intent(Menu.this, MainActivity.class);
-                intentReg.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intentReg);
+                Intent intent = new Intent(Menu.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish(); // Finaliza Menu activity para evitar que el usuario regrese a ella con el botón de retroceso
             }
         });
@@ -113,3 +119,4 @@ public class Menu extends AppCompatActivity {
         });
     }
 }
+

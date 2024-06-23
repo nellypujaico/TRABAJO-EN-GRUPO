@@ -1,38 +1,95 @@
 package com.example.proyecto;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
+import com.example.proyecto.Metodos.Gasto;
+import com.example.proyecto.auth_user.DBHelper_auth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InformesGastos extends AppCompatActivity {
-    Button btnInformesRegresar;
+    private AnyChartView anyChartView;
+    Button btnRegresar;
+    private DBHelper_auth dbHelper;
+    private int userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_informes_gastos);
 
-        btnInformesRegresar = (Button)findViewById(R.id.btnInformesRegresar);
+        // Initialize AnyChartView
+        anyChartView = findViewById(R.id.any_chart_view);
+        btnRegresar = findViewById(R.id.btnRegresar);
+        // Initialize DBHelper_auth
+        dbHelper = new DBHelper_auth(this);
 
-        btnInformesRegresar.setOnClickListener(new View.OnClickListener() {
+        // Obtain the user ID dynamically (replace with your actual logic)
+        userId = obtenerUserIdActual();
+
+        // Update chart automatically when activity is created
+        actualizarGrafico();
+
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(InformesGastos.this,Menu.class);
-                InformesGastos.this.startActivity(intentReg);
+                Intent intent = new Intent(InformesGastos.this, Menu.class);
+                startActivity(intent);
             }
         });
+    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    // Método para actualizar el gráfico con los gastos del usuario actual
+    private void actualizarGrafico() {
+        // Obtain expenses data for the current user from the database
+        List<Gasto> listaGastos = dbHelper.obtenerGastos(userId);
+
+        // Check if there are any expenses recorded
+        if (listaGastos.isEmpty()) {
+            Toast.makeText(InformesGastos.this, "No hay gastos registrados", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Prepare data for AnyChart
+        Cartesian barChart = AnyChart.column();
+
+        List<DataEntry> dataEntries = new ArrayList<>();
+        for (Gasto gasto : listaGastos) {
+            dataEntries.add(new ValueDataEntry(gasto.getDescripcion(), gasto.getCantidadGasto()));
+        }
+
+        // Configure the chart
+        barChart.data(dataEntries);
+        barChart.title("Gastos por categoría");
+        barChart.xAxis(0).title("Categorías");
+        barChart.yAxis(0).title("Cantidad Gasto");
+
+        // Set the chart to AnyChartView
+        anyChartView.setChart(barChart);
+    }
+
+    // Method to obtain the current user ID (replace with your actual logic)
+    private int obtenerUserIdActual() {
+        // Implement this function according to your authentication logic
+        // For demonstration purposes, assuming user ID is stored in SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+        return preferences.getInt("userId", -1); // Replace -1 with default value if not found
     }
 }
+
+
+
+

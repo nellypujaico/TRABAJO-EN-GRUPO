@@ -146,5 +146,18 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         return result > 0; // Devuelve true si se eliminó al menos una fila
     }
 
+    public boolean actualizarGasto(int id, String nuevaFecha, String nuevaDescripcion, double nuevaCantidad) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("fecha", nuevaFecha);
+        values.put("descripcion", nuevaDescripcion);
+        values.put("cantidad_gasto", nuevaCantidad);
+
+        int filasAfectadas = db.update("gastos", values, "id_gastos = ?", new String[]{String.valueOf(id)});
+
+        return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
+    }
+
+
 }
 
