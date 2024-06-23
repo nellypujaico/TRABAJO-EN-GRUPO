@@ -2,9 +2,9 @@
 <resources>
     <string-array name="tipoCategoria">
         <item>Comestibles</item>
-        <item>Restaurantes y comida rapida</item>
+        <item>Restaurantes y comida rápida</item>
         <item>Bebidas</item>
-        <item>Matricula</item>
+        <item>Matrícula</item>
         <item>Materiales escolares</item>
         <item>Cursos y talleres</item>
         <item>Cine</item>

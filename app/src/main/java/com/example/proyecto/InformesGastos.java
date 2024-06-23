@@ -22,9 +22,10 @@ import java.util.List;
 
 public class InformesGastos extends AppCompatActivity {
     private AnyChartView anyChartView;
-    Button btnRegresar;
+    private Button btnRegresar, btnTexto;
     private DBHelper_auth dbHelper;
     private int userId;
+    private String[] tipoCategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +35,26 @@ public class InformesGastos extends AppCompatActivity {
         // Initialize AnyChartView
         anyChartView = findViewById(R.id.any_chart_view);
         btnRegresar = findViewById(R.id.btnRegresar);
+        btnTexto = findViewById(R.id.btnTexto);
         // Initialize DBHelper_auth
         dbHelper = new DBHelper_auth(this);
 
         // Obtain the user ID dynamically (replace with your actual logic)
         userId = obtenerUserIdActual();
 
+        // Load category names from resources
+        tipoCategoria = getResources().getStringArray(R.array.tipoCategoria);
+
         // Update chart automatically when activity is created
         actualizarGrafico();
 
-        btnRegresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(InformesGastos.this, Menu.class);
-                startActivity(intent);
-            }
+        btnRegresar.setOnClickListener(v -> {
+            Intent intent = new Intent(InformesGastos.this, Menu.class);
+            startActivity(intent);
+        });
+        btnTexto.setOnClickListener(v -> {
+            Intent intent = new Intent(InformesGastos.this, MostrarTotalGastado.class);
+            startActivity(intent);
         });
     }
 
@@ -68,7 +74,9 @@ public class InformesGastos extends AppCompatActivity {
 
         List<DataEntry> dataEntries = new ArrayList<>();
         for (Gasto gasto : listaGastos) {
-            dataEntries.add(new ValueDataEntry(gasto.getIdCategoria(), gasto.getCantidadGasto()));
+            // Convert category ID to category name
+            String categoriaNombre = tipoCategoria[gasto.getIdCategoria()];
+            dataEntries.add(new ValueDataEntry(categoriaNombre, gasto.getCantidadGasto()));
         }
 
         // Configure the chart
@@ -89,7 +97,6 @@ public class InformesGastos extends AppCompatActivity {
         return preferences.getInt("userId", -1); // Replace -1 with default value if not found
     }
 }
-
 
 
 
