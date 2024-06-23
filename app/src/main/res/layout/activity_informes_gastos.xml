@@ -8,18 +8,34 @@
         android:id="@+id/any_chart_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnRegresar"
+        android:layout_above="@id/button_layout"
         android:layout_marginBottom="16dp" />
 
-    <!-- Button to go back -->
-    <Button
-        android:id="@+id/btnRegresar"
+    <!-- LinearLayout to hold the buttons -->
+    <LinearLayout
+        android:id="@+id/button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Regresar"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <!-- Button to go back -->
+        <Button
+            android:id="@+id/btnRegresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regresar" />
+
+        <!-- Button to perform another action -->
+        <Button
+            android:id="@+id/btnTexto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mostrar por texto"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
 
 </RelativeLayout>
 
