@@ -92,9 +92,6 @@ public class GestionIngresos extends AppCompatActivity {
             }
         });
 
-
-
-
         btnIngresoMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

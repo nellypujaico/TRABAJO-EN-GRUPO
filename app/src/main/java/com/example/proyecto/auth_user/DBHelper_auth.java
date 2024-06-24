@@ -80,7 +80,7 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         values.put("id_categoria", id_categoria);
         values.put("descripcion", descripcion);
         long result = db.insert("gastos", null, values);
-        return result != -1; // Simplified return statement
+        return result != -1;
     }
 
     public int obtenerIdCategoria(String nombreCategoria, String tipoCategoria) {
