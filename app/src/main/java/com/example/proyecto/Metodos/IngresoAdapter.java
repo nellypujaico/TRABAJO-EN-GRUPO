@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyecto.DetalleGastoActivity;
 import com.example.proyecto.R;
 
+
 import java.util.List;
 
 public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoViewHolder> {
@@ -23,7 +24,7 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
         this.context = context;
     }
 
-    // Método para actualizar la lista de gastos
+    // Método para actualizar la lista de ingresos
     public void setIngresos(List<Ingreso> listaIngresos) {
         this.listaIngresos = listaIngresos;
         notifyDataSetChanged();
@@ -32,14 +33,14 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
     @NonNull
     @Override
     public IngresoAdapter.IngresoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflar el layout del item de gasto
+        // Inflar el layout del item de ingreso
         View view = LayoutInflater.from(context).inflate(R.layout.item_ingreso, parent, false);
         return new IngresoAdapter.IngresoViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull IngresoAdapter.IngresoViewHolder holder, int position) {
-        // Obtener el gasto en la posición actual
+        // Obtener el ingreso en la posición actual
         Ingreso ingreso = listaIngresos.get(position);
 
         // Asignar valores a las vistas del ViewHolder
@@ -53,7 +54,7 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
             public void onClick(View v) {
                 // Al hacer clic, enviar a la actividad de detalle del gasto
                 Intent intent = new Intent(context, DetalleGastoActivity.class);
-                intent.putExtra("gastoId", ingreso.getId()); // Envía el ID del gasto o toda la información necesaria
+                intent.putExtra("gastoId", ingreso.getId()); // Envía el ID del ingreso o toda la información necesaria
                 context.startActivity(intent);
             }
         });
@@ -64,9 +65,8 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
         return listaIngresos != null ? listaIngresos.size() : 0;
     }
 
-    // ViewHolder para mantener las referencias de las vistas de cada item de gasto
+    // ViewHolder para mantener las referencias de las vistas de cada item de ingreso
     public static class IngresoViewHolder extends RecyclerView.ViewHolder {
-
         TextView txtFecha, txtDescripcion, txtCantidad;
 
         public IngresoViewHolder(@NonNull View itemView) {
@@ -75,7 +75,7 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
             txtFecha = itemView.findViewById(R.id.txtFecha);
             txtDescripcion = itemView.findViewById(R.id.txtDescripcion);
             txtCantidad = itemView.findViewById(R.id.txtCantidad);
-            // Configura más vistas si es necesario
         }
     }
 }
+

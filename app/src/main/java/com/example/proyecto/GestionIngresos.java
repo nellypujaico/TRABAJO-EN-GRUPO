@@ -45,7 +45,7 @@ public class GestionIngresos extends AppCompatActivity {
         txtIngresoDescripcion = findViewById(R.id.txtIngresoDescripcion);
         btnGestionRegresar = findViewById(R.id.btnGestionRegresar);
         btnIngresoRegistrar = findViewById(R.id.btnIngresoRegistrar);
-
+        btnIngresoMostrar = findViewById(R.id.btnIngresoMostrar);
         regasto = new DBHelper_auth(this);
 
         SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
@@ -92,9 +92,9 @@ public class GestionIngresos extends AppCompatActivity {
             }
         });
 
-        /*
 
-        
+
+
         btnIngresoMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class GestionIngresos extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        */
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
