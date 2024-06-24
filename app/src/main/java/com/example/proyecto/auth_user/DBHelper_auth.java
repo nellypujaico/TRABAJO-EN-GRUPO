@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.proyecto.Metodos.Gasto;
+import com.example.proyecto.Metodos.Ingreso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,6 +159,39 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
     }
 
+    public boolean insertarIngreso(int id, String fecha, double ingreso, int id_categoria, String descripcion){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("userid", id);
+        values.put("fecha", fecha);
+        values.put("cantidad_ingresos", ingreso);
+        values.put("id_categoria", id_categoria);
+        values.put("descripcion", descripcion);
+        long result = db.insert("ingresos", null, values);
+        return result != -1; // Simplified return statement
+    }
 
+    public List<Ingreso> obtenerIngreso(int userId) {
+        List<Ingreso> listaIngreso = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ingresos WHERE userid = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("id_ingresos"));
+                String fecha = cursor.getString(cursor.getColumnIndex("fecha"));
+                double cantidadGasto = cursor.getDouble(cursor.getColumnIndex("cantidad_ingresos"));
+                int idCategoria = cursor.getInt(cursor.getColumnIndex("id_categoria"));
+                String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+
+                Ingreso ingreso = new Ingreso(id, userId, fecha, cantidadGasto, idCategoria, descripcion);
+                listaIngreso.add(ingreso);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return listaIngreso;
+    }
 }
 

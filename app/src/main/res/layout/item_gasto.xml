@@ -6,47 +6,49 @@
     android:padding="8dp">
 
     <!-- Primer bloque -->
+
+    <!-- Segundo bloque -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_gasto_item"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:background="@drawable/bg_gasto_item">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/txtFechaLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="Fecha del gasto:"
             android:textColor="@android:color/darker_gray"
-            android:text="Fecha del gasto:" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:text="Fecha"
             android:textColor="@android:color/black"
-            android:text="Fecha" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/txtDescripcionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="Descripción del gasto:"
             android:textColor="@android:color/darker_gray"
-            android:text="Descripción del gasto:" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="Descripción"
             android:textColor="@android:color/black"
-            android:text="Descripción" />
+            android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- Segundo bloque -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

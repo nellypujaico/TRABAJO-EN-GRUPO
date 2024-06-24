@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="412dp"
+        android:layout_height="197dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="-1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/lblFechaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha del ingreso:" />
+
+            <TextView
+                android:id="@+id/lblFecha"
+                android:layout_width="378dp"
+                android:layout_height="34dp"
+                android:text="Fecha" />
+
+            <TextView
+                android:id="@+id/lblDescripcionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripcion del ingreso:" />
+
+            <TextView
+                android:id="@+id/lblDescripcion"
+                android:layout_width="382dp"
+                android:layout_height="31dp"
+                android:text="Descripcion" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/lblIngresoLabel"
+                android:layout_width="176dp"
+                android:layout_height="wrap_content"
+                android:text="Cantidad Ingreso:" />
+
+            <TextView
+                android:id="@+id/lblIngreso"
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:text="Cantidad" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
