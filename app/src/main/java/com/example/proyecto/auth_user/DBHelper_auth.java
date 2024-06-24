@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -158,7 +157,6 @@ public class DBHelper_auth extends SQLiteOpenHelper {
 
         return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
     }
-
     public boolean insertarIngreso(int id, String fecha, double ingreso, int id_categoria, String descripcion){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -170,7 +168,6 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         long result = db.insert("ingresos", null, values);
         return result != -1; // Simplified return statement
     }
-
     public List<Ingreso> obtenerIngreso(int userId) {
         List<Ingreso> listaIngreso = new ArrayList<>();
 

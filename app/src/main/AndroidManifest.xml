@@ -12,39 +12,63 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto"
         tools:targetApi="31">
-
-        <!-- Declaración de actividades -->
-        <activity android:name=".MostrarTotalGastado" android:exported="false" />
-        <activity android:name=".ModificarGastoActivity" android:exported="false" />
-        <activity android:name=".DetalleGastoActivity" android:exported="false" />
-        <activity android:name=".ViewGastos" android:exported="false" />
-<!--        <activity android:name=".MostrarGastos" android:exported="false" />-->
-        <activity android:name=".AlertasRecordatorios" android:exported="false" />
-        <activity android:name=".InformesGastos" android:exported="false" />
-        <activity android:name=".CategorizacionGastos" android:exported="false" />
-        <activity android:name=".GestionIngresos" android:exported="false" />
-        <activity android:name=".RegistroGasto" android:exported="false" />
-
-        <!-- Agregar la actividad ViewIngreso -->
-        <activity android:name=".ViewIngreso" android:exported="false" />
-
-        <activity android:name=".RegistroUsuario" android:exported="true">
+        <activity
+            android:name=".MostrarTotalGastado"
+            android:exported="false" />
+        <activity
+            android:name=".ModificarGastoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetalleGastoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewGastos"
+            android:exported="false" />
+        <activity
+            android:name=".MostrarGastos"
+            android:exported="false" />
+        <activity
+            android:name=".AlertasRecordatorios"
+            android:exported="false" />
+        <activity
+            android:name=".InformesGastos"
+            android:exported="false" />
+        <activity
+            android:name=".CategorizacionGastos"
+            android:exported="false" />
+        <activity
+            android:name=".GestionIngresos"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroGasto"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroUsuario"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Menu" android:exported="true">
+        <activity
+            android:name=".Menu"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
