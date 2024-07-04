@@ -39,8 +39,8 @@ public class RegistroGasto extends AppCompatActivity {
 
         spnCategoria = findViewById(R.id.spnCategoria);
         txtMonto = findViewById(R.id.txtMonto);
-        txtDescripcion = findViewById(R.id.txtDescripcion);
-        txtFecha = findViewById(R.id.txtFecha);
+        txtDescripcion = findViewById(R.id.txtDescripcionIn);
+        txtFecha = findViewById(R.id.txtFechaIn);
         btnRegistrarGasto = findViewById(R.id.btnRegistrarGasto);
         btnRegistroRegresar = findViewById(R.id.btnRegistroRegresar);
         btnMostrarGastos = findViewById(R.id.btnMostrarGastos); // Asegúrate de que el ID sea correcto en el layout

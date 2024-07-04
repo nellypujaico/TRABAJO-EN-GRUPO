@@ -8,7 +8,6 @@ public class Ingreso {
     private int idCategoria;
     private String descripcion;
 
-
     public Ingreso(int id, int userId, String fecha, double cantidadIngreso, int idCategoria, String descripcion) {
         this.id = id;
         this.userId = userId;

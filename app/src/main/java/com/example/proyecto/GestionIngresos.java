@@ -31,8 +31,8 @@ public class GestionIngresos extends AppCompatActivity {
     Spinner spnIngresoCategoria;
     EditText txtIngresoMonto, txtIngresoFecha, txtIngresoDescripcion;
     Button btnGestionRegresar, btnIngresoRegistrar, btnIngresoMostrar;
-    DBHelper_auth regasto;
-    @SuppressLint("MissingInflatedId")
+    DBHelper_auth reingreso;
+    //@SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class GestionIngresos extends AppCompatActivity {
         btnGestionRegresar = findViewById(R.id.btnGestionRegresar);
         btnIngresoRegistrar = findViewById(R.id.btnIngresoRegistrar);
         btnIngresoMostrar = findViewById(R.id.btnIngresoMostrar);
-        regasto = new DBHelper_auth(this);
+        reingreso = new DBHelper_auth(this);
 
         SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
         int userId = preferences.getInt("userId", -1);
@@ -75,7 +75,7 @@ public class GestionIngresos extends AppCompatActivity {
                 String descripcion = txtIngresoDescripcion.getText().toString();
                 int idCategoria = Categoria();
 
-                boolean registroExitoso = regasto.insertarIngreso(userId, fecha, monto, idCategoria, descripcion);
+                boolean registroExitoso = reingreso.insertarIngreso(userId, fecha, monto, idCategoria, descripcion);
                 if (registroExitoso) {
                     Toast.makeText(GestionIngresos.this, "REGISTRO GUARDADO", Toast.LENGTH_LONG).show();
                 } else {
@@ -108,8 +108,6 @@ public class GestionIngresos extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
 
     }
 

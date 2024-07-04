@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Proyecto"
         tools:targetApi="31">
         <activity
+            android:name=".ModificarIngresoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetalleIngresoActivity"
+            android:exported="false" />
+        <activity
             android:name=".MostrarTotalGastado"
             android:exported="false" />
         <activity
@@ -23,6 +29,9 @@
             android:exported="false" />
         <activity
             android:name=".ViewGastos"
+            android:exported="false" />
+        <activity
+            android:name=".ViewIngreso"
             android:exported="false" />
         <activity
             android:name=".MostrarGastos"

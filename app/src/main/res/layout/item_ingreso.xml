@@ -1,36 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Primer bloque -->
+
+    <!-- Segundo bloque -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gasto_item"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/txtFechaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha del gasto:"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtFechaI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtDescripcionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción del gasto:"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtDescripcionI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
-        tools:ignore="MissingConstraints">
+        android:background="@drawable/bg_gasto_item">
 
         <TextView
-            android:id="@+id/txtFecha"
-            android:layout_width="match_parent"
+            android:id="@+id/txtCantidadLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha del ingreso"
-            tools:ignore="MissingConstraints" />
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="Cantidad del gasto:" />
 
         <TextView
-            android:id="@+id/txtDescripcion"
-            android:layout_width="match_parent"
+            android:id="@+id/txtCantidadI"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripcion del ingreso"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/txtCantidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cantidad Ingreso"
-            tools:ignore="MissingConstraints" />
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:text="Cantidad" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Agrega más bloques LinearLayout según sea necesario para mostrar más detalles del gasto -->
+
+</LinearLayout>

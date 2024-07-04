@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Detalles del Gasto"
+        android:text="Detalles del Ingreso"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -26,7 +26,7 @@
             android:id="@+id/txtFechaIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha del gasto: "
+            android:text="Fecha del ingreso: "
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -35,20 +35,20 @@
             android:id="@+id/txtDescripcionIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descripción del gasto: "
+            android:layout_marginTop="8dp"
+            android:text="Descripción del ingreso: "
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:textStyle="bold" />
 
         <!-- Cantidad del gasto -->
         <TextView
             android:id="@+id/txtCantidadIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad del gasto: "
+            android:layout_marginTop="8dp"
+            android:text="Cantidad del ingreso: "
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+            android:textStyle="bold" />
 
         <!-- Botones -->
         <LinearLayout
@@ -85,5 +85,3 @@
     </LinearLayout>
 
 </RelativeLayout>
-
-

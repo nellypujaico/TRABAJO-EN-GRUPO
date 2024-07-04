@@ -190,5 +190,42 @@ public class DBHelper_auth extends SQLiteOpenHelper {
         cursor.close();
         return listaIngreso;
     }
+    public Ingreso obtenerIngresoPorId(int ingresoId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Ingreso ingreso = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM ingresos WHERE id_ingresos = ?", new String[]{String.valueOf(ingresoId)});
+
+        if (cursor.moveToFirst()) {
+            int userId = cursor.getInt(cursor.getColumnIndex("userid"));
+            String fecha = cursor.getString(cursor.getColumnIndex("fecha"));
+            double cantidadGasto = cursor.getDouble(cursor.getColumnIndex("cantidad_gasto"));
+            int idCategoria = cursor.getInt(cursor.getColumnIndex("id_categoria"));
+            String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+
+            ingreso = new Ingreso(ingresoId, userId, fecha, cantidadGasto, idCategoria, descripcion);
+        }
+
+        cursor.close();
+        return ingreso;
+    }
+
+    public boolean eliminarIngreso(int ingresoId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete("ingresos", "id_ingresos = ?", new String[]{String.valueOf(ingresoId)});
+        return result > 0; // Devuelve true si se eliminó al menos una fila
+    }
+
+    public boolean actualizarIngreso(int id, String nuevaFecha, String nuevaDescripcion, double nuevaCantidad) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("fecha", nuevaFecha);
+        values.put("descripcion", nuevaDescripcion);
+        values.put("cantidad_gasto", nuevaCantidad);
+
+        int filasAfectadas = db.update("gastos", values, "id_ingresos = ?", new String[]{String.valueOf(id)});
+
+        return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
+    }
 }
 

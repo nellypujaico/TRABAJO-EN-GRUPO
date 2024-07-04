@@ -7,11 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyecto.Metodos.Gasto;
 import com.example.proyecto.auth_user.DBHelper_auth;
@@ -37,9 +33,9 @@ public class DetalleGastoActivity extends AppCompatActivity {
         }
 
         // Inicializar vistas
-        txtFecha = findViewById(R.id.txtFecha);
-        txtDescripcion = findViewById(R.id.txtDescripcion);
-        txtCantidad = findViewById(R.id.txtCantidad);
+        txtFecha = findViewById(R.id.txtFechaIn);
+        txtDescripcion = findViewById(R.id.txtDescripcionIn);
+        txtCantidad = findViewById(R.id.txtCantidadIn);
         BtnRegresar = findViewById(R.id.btnRegresar);
         BtnModificar = findViewById(R.id.btnModificar);
         BtnEliminar = findViewById(R.id.btnEliminar);

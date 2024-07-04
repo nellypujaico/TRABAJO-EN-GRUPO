@@ -11,9 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto.DetalleGastoActivity;
+import com.example.proyecto.DetalleIngresoActivity;
 import com.example.proyecto.R;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoViewHolder> {
@@ -22,6 +24,7 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
 
     public IngresoAdapter(Context context) {
         this.context = context;
+        this.listaIngresos = new ArrayList<>();
     }
 
     // Método para actualizar la lista de ingresos
@@ -32,29 +35,30 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
 
     @NonNull
     @Override
-    public IngresoAdapter.IngresoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IngresoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflar el layout del item de ingreso
         View view = LayoutInflater.from(context).inflate(R.layout.item_ingreso, parent, false);
-        return new IngresoAdapter.IngresoViewHolder(view);
+        return new IngresoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngresoAdapter.IngresoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IngresoViewHolder holder, int position) {
         // Obtener el ingreso en la posición actual
         Ingreso ingreso = listaIngresos.get(position);
 
-        // Asignar valores a las vistas del ViewHolder
-        holder.txtFecha.setText(ingreso.getFecha());
-        holder.txtDescripcion.setText(ingreso.getDescripcion());
-        holder.txtCantidad.setText(String.valueOf(ingreso.getCantidadIngreso()));
-
+        if (ingreso != null){
+            // Asignar valores a las vistas del ViewHolder
+            holder.txtFecha.setText(ingreso.getFecha());
+            holder.txtDescripcion.setText(ingreso.getDescripcion());
+            holder.txtCantidad.setText(String.valueOf(ingreso.getCantidadIngreso()));
+        }
         // Manejar clic en el elemento del RecyclerView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Al hacer clic, enviar a la actividad de detalle del gasto
-                Intent intent = new Intent(context, DetalleGastoActivity.class);
-                intent.putExtra("gastoId", ingreso.getId()); // Envía el ID del ingreso o toda la información necesaria
+                Intent intent = new Intent(context, DetalleIngresoActivity.class);
+                intent.putExtra("ingresoId", ingreso.getId()); // Envía el ID del ingreso o toda la información necesaria
                 context.startActivity(intent);
             }
         });
@@ -72,9 +76,9 @@ public class IngresoAdapter extends RecyclerView.Adapter<IngresoAdapter.IngresoV
         public IngresoViewHolder(@NonNull View itemView) {
             super(itemView);
             // Inicializar las vistas
-            txtFecha = itemView.findViewById(R.id.txtFecha);
-            txtDescripcion = itemView.findViewById(R.id.txtDescripcion);
-            txtCantidad = itemView.findViewById(R.id.txtCantidad);
+            txtFecha = itemView.findViewById(R.id.txtFechaI);
+            txtDescripcion = itemView.findViewById(R.id.txtDescripcionI);
+            txtCantidad = itemView.findViewById(R.id.txtCantidadI);
         }
     }
 }

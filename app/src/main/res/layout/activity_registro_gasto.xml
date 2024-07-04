@@ -55,7 +55,7 @@
                 android:layout_marginTop="16dp" />
 
             <EditText
-                android:id="@+id/txtFecha"
+                android:id="@+id/txtFechaIn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="Categoría"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtFecha"
+                app:layout_constraintTop_toBottomOf="@+id/txtFechaIn"
                 android:layout_marginTop="16dp" />
 
             <Spinner
@@ -100,7 +100,7 @@
                 android:layout_marginTop="16dp" />
 
             <EditText
-                android:id="@+id/txtDescripcion"
+                android:id="@+id/txtDescripcionIn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start|top"

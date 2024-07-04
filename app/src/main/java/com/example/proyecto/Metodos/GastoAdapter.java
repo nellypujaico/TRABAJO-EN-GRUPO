@@ -71,9 +71,9 @@ public class GastoAdapter extends RecyclerView.Adapter<GastoAdapter.GastoViewHol
         public GastoViewHolder(@NonNull View itemView) {
             super(itemView);
             // Inicializar las vistas
-            txtFecha = itemView.findViewById(R.id.txtFecha);
-            txtDescripcion = itemView.findViewById(R.id.txtDescripcion);
-            txtCantidad = itemView.findViewById(R.id.txtCantidad);
+            txtFecha = itemView.findViewById(R.id.txtFechaIn);
+            txtDescripcion = itemView.findViewById(R.id.txtDescripcionIn);
+            txtCantidad = itemView.findViewById(R.id.txtCantidadIn);
             // Configura más vistas si es necesario
         }
     }

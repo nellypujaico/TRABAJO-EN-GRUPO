@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.proyecto.Metodos.GastoAdapter;  // Ajusta el paquete según tu estructura de paquetes
 
 import com.example.proyecto.Metodos.Ingreso;
 import com.example.proyecto.Metodos.IngresoAdapter;
