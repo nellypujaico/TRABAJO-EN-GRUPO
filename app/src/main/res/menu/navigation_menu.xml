@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/menuHome"
         android:icon="@drawable/icons8_home"
@@ -9,8 +8,4 @@
         android:id="@+id/menuProfile"
         android:icon="@drawable/icons8_user_64"
         android:title="Perfil"/>
-    <item
-        android:id="@+id/menuConfiguración"
-        android:icon="@drawable/icons8_setting"
-        android:title="Configuración"/>
 </menu>
