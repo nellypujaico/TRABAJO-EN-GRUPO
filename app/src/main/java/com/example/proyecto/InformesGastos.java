@@ -54,7 +54,7 @@ public class InformesGastos extends AppCompatActivity {
         btnTexto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InformesGastos.this, Menu.class);
+                Intent intent = new Intent(InformesGastos.this, ViewGastosTotales.class);
                 startActivity(intent);
             }
         });
@@ -67,16 +67,17 @@ public class InformesGastos extends AppCompatActivity {
 
         // Check if there are any expenses recorded
         if (listaGastos.isEmpty()) {
-            Toast.makeText(InformesGastos.this, "No hay gastos registrados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InformesGastos.this, "No hay gastos registrados", Toast.LENGTH_SHORT).   show();
             return;
         }
 
         // Prepare data for AnyChart
         Cartesian barChart = AnyChart.column();
-
+        String categoriaID;
         List<DataEntry> dataEntries = new ArrayList<>();
         for (Gasto gasto : listaGastos) {
-            dataEntries.add(new ValueDataEntry(gasto.getIdCategoria(), gasto.getCantidadGasto()));
+            String categoria = gasto.seleccionarCategoria(gasto.getIdCategoria());
+            dataEntries.add(new ValueDataEntry(categoria, gasto.getCantidadGasto()));
         }
 
         // Configure the chart
