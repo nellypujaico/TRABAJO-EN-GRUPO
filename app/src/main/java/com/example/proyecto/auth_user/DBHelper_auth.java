@@ -5,41 +5,44 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.proyecto.Metodos.Gasto;
 import com.example.proyecto.Metodos.Ingreso;
+import com.example.proyecto.Metodos.Perfil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper_auth extends SQLiteOpenHelper {
     public static final String DBName = "contafacil.db";
+    private static final int DB_VERSION = 2;
 
     public DBHelper_auth(@Nullable Context context) {
-        super(context, DBName, null, 1);
+        super(context, DBName, null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users(userid INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT UNIQUE NOT NULL, " +
-                "password TEXT NOT NULL)");
-        db.execSQL("CREATE TABLE categoria(id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL," +
-                "tipo TEXT NOT NULL)");
-        db.execSQL("CREATE TABLE ingresos(id_ingresos INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER,fecha DATE, " +
-                "cantidad_ingresos DECIMAL, id_categoria INTEGER, " +
-                "descripcion TEXT NOT NULL,FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria) ," +
-                "FOREIGN KEY(userid) REFERENCES users(userid))");
-        db.execSQL("CREATE TABLE gastos(id_gastos INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER,fecha DATE, " +
-                "cantidad_gasto DECIMAL,id_categoria INTEGER, descripcion TEXT NOT NULL," +
-                "FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria)," +
-                "FOREIGN KEY(userid) REFERENCES users(userid))");
+        Log.d("DBHelper_auth", "Creating database tables");
+        db.execSQL("CREATE TABLE users(userid INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE categoria(id_categoria INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, tipo TEXT NOT NULL)");
+        db.execSQL("CREATE TABLE ingresos(id_ingresos INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER, fecha DATE, cantidad_ingresos DECIMAL, id_categoria INTEGER, descripcion TEXT NOT NULL, FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria), FOREIGN KEY(userid) REFERENCES users(userid))");
+        db.execSQL("CREATE TABLE gastos(id_gastos INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER, fecha DATE, cantidad_gasto DECIMAL, id_categoria INTEGER, descripcion TEXT NOT NULL, FOREIGN KEY(id_categoria) REFERENCES categoria(id_categoria), FOREIGN KEY(userid) REFERENCES users(userid))");
+        db.execSQL("CREATE TABLE profile(profile_id INTEGER PRIMARY KEY AUTOINCREMENT, userid INTEGER, nombre TEXT, apellido TEXT, fecha_nacimiento DATE, direccion TEXT, telefono TEXT, FOREIGN KEY(userid) REFERENCES users(userid))");
+        Log.d("DBHelper_auth", "Table profile created");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.d("DBHelper_auth", "Upgrading database from version " + oldVersion + " to " + newVersion);
         db.execSQL("DROP TABLE IF EXISTS users");
+        db.execSQL("DROP TABLE IF EXISTS categoria");
+        db.execSQL("DROP TABLE IF EXISTS ingresos");
+        db.execSQL("DROP TABLE IF EXISTS gastos");
+        db.execSQL("DROP TABLE IF EXISTS profile");
         onCreate(db);
     }
 
@@ -243,5 +246,68 @@ public class DBHelper_auth extends SQLiteOpenHelper {
 
         return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
     }
+
+    // Insertar perfil
+    public boolean insertarPerfil(int userId, String nombre, String apellido, String fechaNacimiento, String direccion, String telefono) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("userid", userId);
+        values.put("nombre", nombre);
+        values.put("apellido", apellido);
+        values.put("fecha_nacimiento", fechaNacimiento);
+        values.put("direccion", direccion);
+        values.put("telefono", telefono);
+
+        long result = db.insertWithOnConflict("profile", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+
+        return result != -1; // Devuelve true si la inserción fue exitosa
+    }
+
+    // Actualizar perfil
+    public boolean actualizarPerfil(int userId, String nombre, String apellido, String fechaNacimiento, String direccion, String telefono) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        values.put("apellido", apellido);
+        values.put("fecha_nacimiento", fechaNacimiento);
+        values.put("direccion", direccion);
+        values.put("telefono", telefono);
+
+        int filasAfectadas = db.update("profile", values, "userid = ?", new String[]{String.valueOf(userId)});
+
+        return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
+    }
+
+    // Obtener perfil
+    public Perfil obtenerPerfil(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Perfil perfil = null;
+        Cursor cursor = db.query("profile", null, "userid = ?", new String[]{String.valueOf(userId)}, null, null, null);
+        if (cursor.moveToFirst()) {
+            // Obtener datos del cursor
+            int id = cursor.getInt(cursor.getColumnIndex("userid"));
+            String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+            String apellido = cursor.getString(cursor.getColumnIndex("apellido"));
+            String fechaNacimiento = cursor.getString(cursor.getColumnIndex("fecha_nacimiento"));
+            String direccion = cursor.getString(cursor.getColumnIndex("direccion"));
+            String telefono = cursor.getString(cursor.getColumnIndex("telefono"));
+
+            // Crear instancia de Perfil con los datos obtenidos
+            perfil = new Perfil(id, nombre, apellido, fechaNacimiento, direccion, telefono);
+        }
+        cursor.close();
+        return perfil;
+    }
+    public void printDatabaseSchema() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                Log.d("DBHelper_auth", "Table: " + cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+    }
+
 }
 

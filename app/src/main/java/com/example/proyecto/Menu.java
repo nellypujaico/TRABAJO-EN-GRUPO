@@ -154,7 +154,10 @@ public class Menu extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.menuProfile) {
                     // Lógica para navegar a la actividad de perfil
+                    SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                    int userId = preferences.getInt("userId", -1);
                     Intent intent = new Intent(Menu.this, Perfil.class);
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
                     return true;
                 }
