@@ -11,4 +11,6 @@
     <color name="colorAzul">#2196F3</color>
     <color name="primary">#0857F6</color>
     <color name="secondary">#517FEE</color>
+    <color name="colorBackground">#EBEBEB</color>
+    <color name="ColorDivider">#D6D6D6</color>
 </resources>
