@@ -8,6 +8,18 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".RegistroGasto">
+    <TextView
+        android:id="@+id/tvTituloGestionGastos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GESTIÓN DE GASTOS"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -18,7 +30,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tvTituloGestionGastos">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

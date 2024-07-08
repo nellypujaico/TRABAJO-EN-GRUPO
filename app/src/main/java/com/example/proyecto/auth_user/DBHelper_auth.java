@@ -157,6 +157,22 @@ public class DBHelper_auth extends SQLiteOpenHelper {
 
         return filasAfectadas > 0; // Devuelve true si se actualizó al menos una fila
     }
+
+    public double obtenerTotalGastos(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        double totalGastos = 0;
+
+        Cursor cursor = db.rawQuery("SELECT SUM(cantidad_gasto) as total FROM gastos WHERE userid = ?", new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            totalGastos = cursor.getDouble(cursor.getColumnIndex("total"));
+        }
+
+        cursor.close();
+        return totalGastos;
+    }
+
+
     public boolean insertarIngreso(int id, String fecha, double ingreso, int id_categoria, String descripcion){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

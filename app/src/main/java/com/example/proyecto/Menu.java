@@ -1,5 +1,6 @@
 package com.example.proyecto;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.proyecto.auth_user.DBHelper_auth;
 
 import java.util.ArrayList;
 
@@ -89,8 +93,25 @@ public class Menu extends AppCompatActivity {
         btnAlertas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, AlertasRecordatorios.class);
-                startActivity(intent);
+                SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                int userId = preferences.getInt("userId", -1);
+                if (userId != -1) {
+                    DBHelper_auth dbHelper = new DBHelper_auth(Menu.this);
+                    double totalGastos = dbHelper.obtenerTotalGastos(userId);
+
+                    // Crear y mostrar el AlertDialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
+                    builder.setTitle("Total Gastos");
+                    builder.setMessage("El total de tus gastos es: " + totalGastos);
+                    builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
 
@@ -111,6 +132,9 @@ public class Menu extends AppCompatActivity {
                 finish(); // Finaliza Menu activity para evitar que el usuario regrese a ella con el botón de retroceso
             }
         });
+
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
