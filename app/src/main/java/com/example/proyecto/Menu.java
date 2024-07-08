@@ -4,18 +4,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.proyecto.R;
 import com.example.proyecto.auth_user.DBHelper_auth;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -46,6 +52,8 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
+
+
 
         btnRegistrarGasto = findViewById(R.id.btnRegistrarGasto);
         btnRegistrarGasto.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +142,25 @@ public class Menu extends AppCompatActivity {
         });
 
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.menuHome) {
+                    // Lógica para navegar a la actividad de inicio
+                    Intent intent = new Intent(Menu.this, Menu.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.menuProfile) {
+                    // Lógica para navegar a la actividad de perfil
+                    Intent intent = new Intent(Menu.this, Perfil.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -141,6 +168,8 @@ public class Menu extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
     }
 }
 
