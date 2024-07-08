@@ -44,31 +44,31 @@ public class Gasto {
     public String seleccionarCategoria(int categoria){
         String categoriaID = "";
         switch (categoria){
-            case 0: categoriaID = "Comestibles"; break;
-            case 1: categoriaID = "Restaurantes"; break;
-            case 2: categoriaID = "Bebidas"; break;
-            case 3: categoriaID = "Matrícula"; break;
-            case 4: categoriaID = "Materiales escolares"; break;
-            case 5: categoriaID = "Cursos"; break;
-            case 6: categoriaID = "Cine"; break;
-            case 7: categoriaID = "Conciertos"; break;
-            case 8: categoriaID = "Recreativos"; break;
-            case 9: categoriaID = "Consultas médicas"; break;
-            case 10: categoriaID = "Medicamentos"; break;
-            case 11: categoriaID = "Seguros médicos"; break;
-            case 12: categoriaID = "Transporte"; break;
-            case 13: categoriaID = "Mantenimiento"; break;
-            case 14: categoriaID = "Viajes"; break;
-            case 15: categoriaID = "Alquiler"; break;
-            case 16: categoriaID = "Servicios públicos"; break;
-            case 17: categoriaID = "Mantenimiento"; break;
-            case 18: categoriaID = "Ropa"; break;
-            case 19: categoriaID = "Calzado"; break;
-            case 20: categoriaID = "Accesorios"; break;
-            case 21: categoriaID = "Alojamiento"; break;
-            case 22: categoriaID = "Transporte publico"; break;
-            case 23: categoriaID = "Turismo"; break;
-            case 24: categoriaID = "Otros"; break;
+            case 1: categoriaID = "Comestibles"; break;
+            case 2: categoriaID = "Restaurantes"; break;
+            case 3: categoriaID = "Bebidas"; break;
+            case 4: categoriaID = "Matrícula"; break;
+            case 5: categoriaID = "Materiales escolares"; break;
+            case 6: categoriaID = "Cursos"; break;
+            case 7: categoriaID = "Cine"; break;
+            case 8: categoriaID = "Conciertos"; break;
+            case 9: categoriaID = "Recreativos"; break;
+            case 10: categoriaID = "Consultas médicas"; break;
+            case 11: categoriaID = "Medicamentos"; break;
+            case 12: categoriaID = "Seguros médicos"; break;
+            case 13: categoriaID = "Transporte"; break;
+            case 14: categoriaID = "Mantenimiento"; break;
+            case 15: categoriaID = "Viajes"; break;
+            case 16: categoriaID = "Alquiler"; break;
+            case 17: categoriaID = "Servicios públicos"; break;
+            case 18: categoriaID = "Mantenimiento"; break;
+            case 19: categoriaID = "Ropa"; break;
+            case 20: categoriaID = "Calzado"; break;
+            case 21: categoriaID = "Accesorios"; break;
+            case 22: categoriaID = "Alojamiento"; break;
+            case 23: categoriaID = "Transporte publico"; break;
+            case 24: categoriaID = "Turismo"; break;
+            case 25: categoriaID = "Otros"; break;
         }
         return categoriaID;
     }
